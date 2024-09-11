@@ -8,11 +8,17 @@ import { TextField, Button, Container, Box, Typography, Grid } from '@mui/materi
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/authSlice';
 
+// Define the types for Formik values and API errors
 interface LoginValues {
   username: string;
   password: string;
 }
 
+interface ErrorResponse {
+  message: string;
+}
+
+// Validation schema using Yup
 const validationSchema = Yup.object({
   username: Yup.string().required('User Name is required'),
   password: Yup.string().required('Password is required'),
@@ -44,7 +50,7 @@ const Login: React.FC = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData: ErrorResponse = await response.json();
         throw new Error(errorData.message || 'Login failed');
       }
 
@@ -54,8 +60,12 @@ const Login: React.FC = () => {
       dispatch(login({ username: values.username })); // Dispatch username on login
       router.push('/products');
 
-    } catch (error: any) {
-      console.error('Login failed:', error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Login failed:', error.message);
+      } else {
+        console.error('An unexpected error occurred');
+      }
     } finally {
       setSubmitLoad(false);
     }

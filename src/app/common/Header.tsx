@@ -1,3 +1,4 @@
+// components/HeaderMenu.tsx
 "use client";
 import React, { useState, MouseEvent } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Container } from '@mui/material';
@@ -5,6 +6,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Link from 'next/link';
 import { LoginOutlined } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/store';
 import { logout } from '../../redux/authSlice';
 
 const titleStyle = {
@@ -13,8 +15,8 @@ const titleStyle = {
 
 const HeaderMenu: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const isAuthenticated = useSelector((state: any) => state.auth.isAuthenticated);
-  const username = useSelector((state: any) => state.auth.username);
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const username = useSelector((state: RootState) => state.auth.username);
   const dispatch = useDispatch();
 
   const handleMenuOpen = (event: MouseEvent<HTMLElement>) => {

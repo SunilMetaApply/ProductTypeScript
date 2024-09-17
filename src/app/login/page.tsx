@@ -1,24 +1,22 @@
-"use client";
+"use client"
+
 import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
-import { API_URL } from '../../../env';
+import { API_URL } from '../../../env'; 
 import { TextField, Button, Container, Box, Typography, Grid } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/authSlice';
+import { login } from '../../redux/slice/authSlice';
 
-// Define the types for Formik values and API errors
 interface LoginValues {
   username: string;
   password: string;
 }
-
 interface ErrorResponse {
   message: string;
 }
 
-// Validation schema using Yup
 const validationSchema = Yup.object({
   username: Yup.string().required('User Name is required'),
   password: Yup.string().required('Password is required'),
@@ -34,12 +32,8 @@ const Login: React.FC = () => {
     password: '',
   };
 
-  const handleSubmit = async (
-    values: LoginValues,
-    { resetForm }: FormikHelpers<LoginValues>
-  ) => {
+  const handleSubmit = async (values: LoginValues, { resetForm }: FormikHelpers<LoginValues>) => {
     setSubmitLoad(true);
-
     try {
       const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
@@ -55,10 +49,25 @@ const Login: React.FC = () => {
       }
 
       const data = await response.json();
-      console.log('Login successful:', data);
+      const token = data.token;
+      const userResponse = await fetch(`${API_URL}/user/me`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!userResponse.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+
+      const userData = await userResponse.json();
+      console.log('userData')
+      console.log(userData)
+      dispatch(login({ username: values.username, token, userDetails: userData }));
+
+      router.push('/user/profile'); 
+
       resetForm();
-      dispatch(login({ username: values.username })); // Dispatch username on login
-      router.push('/products');
 
     } catch (error) {
       if (error instanceof Error) {

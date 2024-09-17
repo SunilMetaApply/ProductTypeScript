@@ -79,8 +79,8 @@ const Home: React.FC = () => {
       </Box>
 
       <Box sx={{ padding: '20px 0px' }}>
-        <Grid container spacing={2}>
-          <Grid sx={{position:'sticky', top:'10px'}} item xs={3}>
+        <Grid  container spacing={2}>
+          <Grid item xs={12} md={3} sx={{position:'sticky', top:'10px'}}>
             <Typography variant="h6">Categories</Typography>
             <FormGroup sx={{maxHeight:'500px', overflowY:'auto', flexWrap:'inherit'}}>
               {categories.map((category) => (
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
             </FormGroup>
           </Grid>
 
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             <Grid container spacing={2}>
               {paginatedProducts.map((product) => (
                 <Grid item xs={12} md={4} key={product.id}>

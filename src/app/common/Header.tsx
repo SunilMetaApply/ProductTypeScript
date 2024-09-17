@@ -1,4 +1,3 @@
-// components/HeaderMenu.tsx
 "use client";
 import React, { useState, MouseEvent } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Container } from '@mui/material';
@@ -7,17 +6,23 @@ import Link from 'next/link';
 import { LoginOutlined } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { logout } from '../../redux/authSlice';
+import { logout } from '../../redux/slice/authSlice';
+import { useRouter } from 'next/navigation';
 
 const titleStyle = {
   flexGrow: 1,
 };
+
+
 
 const HeaderMenu: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   const username = useSelector((state: RootState) => state.auth.username);
   const dispatch = useDispatch();
+
+
+  const router = useRouter()
 
   const handleMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -30,6 +35,7 @@ const HeaderMenu: React.FC = () => {
   const handleLogout = () => {
     dispatch(logout());
     handleMenuClose();
+    router.push("/")
   };
 
   return (
@@ -62,8 +68,8 @@ const HeaderMenu: React.FC = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
               >
-                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-                <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+                <MenuItem onClick={handleMenuClose}><Link href={`/user/profile`}>Profile</Link> </MenuItem>
+                {/* <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </>

@@ -8,12 +8,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { logout } from '../../redux/slice/authSlice';
 import { useRouter } from 'next/navigation';
+import HeaderSearch from './HeaderSearch';
 
 const titleStyle = {
   flexGrow: 1,
 };
-
-
 
 const HeaderMenu: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -48,7 +47,11 @@ const HeaderMenu: React.FC = () => {
           <Link href={`/`} style={titleStyle}>
             <Typography variant="h6">MetaApply</Typography>
           </Link>
-          <Link href={`/products`} style={{ color: 'inherit', textDecoration: 'none' }}>Products</Link>
+          <div style={titleStyle}>
+              <HeaderSearch/>
+          </div>
+          
+          <Link href={`/products`} style={{ color: 'inherit', textDecoration: 'none', marginLeft:'20px' }}>Products</Link>
           {isAuthenticated ? (
             <>
               <IconButton

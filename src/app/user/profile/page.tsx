@@ -4,7 +4,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { Box, Typography, Grid, Avatar } from '@mui/material';
-import Link from 'next/link';
 
 const Profile: React.FC = () => {
   const { userDetails } = useSelector((state: RootState) => state.auth);
@@ -14,14 +13,14 @@ const Profile: React.FC = () => {
   }
 
   return (
-    <Box p={2}>
+    <Box p={2} sx={{paddingTop:'80px'}}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
             <Typography variant="h4" gutterBottom>Profile</Typography>
         </Grid>
-        <Grid item xs={6}>
+        {/* <Grid item xs={6}>
             <Link href={`/user/edit`}>Edit</Link>
-        </Grid>
+        </Grid> */}
       </Grid>
       <Grid container spacing={2}>
         <Grid item xs={12} md={1}>
@@ -41,7 +40,7 @@ const Profile: React.FC = () => {
           <Typography variant="body1">Eye Color: {userDetails.eyeColor}</Typography>
           <Typography variant="body1">Hair: {userDetails.hair.color}, {userDetails.hair.type}</Typography>
         </Grid>
-        <Grid item xs={12} md={2}>
+        <Grid item xs={12} md={3}>
           <Typography variant="h6">Address</Typography>
           <Typography variant="body1">Address: {userDetails.address.address}</Typography>
           <Typography variant="body1">City: {userDetails.address.city}</Typography>
@@ -49,7 +48,7 @@ const Profile: React.FC = () => {
           <Typography variant="body1">Postal Code: {userDetails.address.postalCode}</Typography>
           <Typography variant="body1">Country: {userDetails.address.country}</Typography>
         </Grid>
-        <Grid item xs={12} md={2}>
+        <Grid item xs={12} md={3}>
           <Typography variant="h6">Company</Typography>
           <Typography variant="body1">Name: {userDetails.company.name}</Typography>
           <Typography variant="body1">Department: {userDetails.company.department}</Typography>
@@ -64,12 +63,12 @@ const Profile: React.FC = () => {
           <Typography variant="body1">Currency: {userDetails.bank.currency}</Typography>
           <Typography variant="body1">IBAN: {userDetails.bank.iban}</Typography>
         </Grid>
-        <Grid item xs={12} md={2}>
+        {/* <Grid item xs={12} md={2}>
           <Typography variant="h6">Crypto</Typography>
           <Typography variant="body1">Coin: {userDetails.crypto.coin}</Typography>
           <Typography variant="body1">Wallet: {userDetails.crypto.wallet}</Typography>
           <Typography variant="body1">Network: {userDetails.crypto.network}</Typography>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Box>
   );

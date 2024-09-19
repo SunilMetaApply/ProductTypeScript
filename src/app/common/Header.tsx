@@ -39,7 +39,7 @@ const HeaderMenu: React.FC = () => {
 
   return (
     <AppBar
-      position="static"
+      position="fixed"
       sx={{ bgcolor: 'primary.main' }}
     >
       <Container maxWidth="lg">

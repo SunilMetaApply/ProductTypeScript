@@ -16,7 +16,7 @@ const Edit:React.FC = () => {
 
   return (
     <>
-      <Container>
+      <Container sx={{paddingTop:'80px'}}>
         <Box sx={{padding:'30px'}}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={3}>

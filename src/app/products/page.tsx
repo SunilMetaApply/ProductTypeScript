@@ -21,6 +21,7 @@ import {
 import useProducts from '../customhooks/useProducts';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { useRouter } from 'next/navigation';
 
 const Home: React.FC = () => {
   const { categories, filteredProducts, handleCategoryChange, handleSearchChange, handleSortChange } = useProducts();
@@ -28,6 +29,8 @@ const Home: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<string>('none');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
+
+  const router = useRouter()
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSearch = event.target.value;
@@ -53,8 +56,15 @@ const Home: React.FC = () => {
     setCurrentPage(value);
   };
 
+
+  const seeDetail = (productId: number) => {
+    router.push(`/products/${productId}`);
+  };
+
+
+
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ height: '100vh', paddingTop:'80px' }}>
       <Box sx={{ padding: '20px 0px', display: 'flex', justifyContent: 'end', gap: '1rem' }}>
         <TextField
           label="Search Products"
@@ -80,9 +90,10 @@ const Home: React.FC = () => {
 
       <Box sx={{ padding: '20px 0px' }}>
         <Grid  container spacing={2}>
-          <Grid item xs={12} md={3} sx={{position:'sticky', top:'10px'}}>
+          <Grid item xs={12} md={3} sx={{ position: 'sticky', top: 20, height: 'fit-content' }}>
             <Typography variant="h6">Categories</Typography>
             <FormGroup sx={{maxHeight:'500px', overflowY:'auto', flexWrap:'inherit'}}>
+            {/* <FormGroup> */}
               {categories.map((category) => (
                 <FormControlLabel
                   key={category.slug}
@@ -103,7 +114,8 @@ const Home: React.FC = () => {
                       height="140"
                       image={product.thumbnail}
                       alt={product.title}
-                      sx={{ objectFit: 'contain' }}
+                      sx={{ objectFit: 'contain', cursor:'pointer' }}
+                      onClick={() => seeDetail (product.id)}
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h6" component="div">

@@ -66,7 +66,7 @@ export default function ProductDetail() {
 
   if (error) {
     return (
-      <Container>
+      <Container sx={{paddingTop:'80px'}}>
         <Alert severity="error">Error: {error}</Alert>
       </Container>
     );
@@ -74,14 +74,14 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <Container>
+      <Container sx={{paddingTop:'80px'}}>
         <Typography variant="h6" color="textSecondary">Product not found.</Typography>
       </Container>
     );
   }
 
   return (
-    <Container sx={{paddingTop:'30px'}}>
+    <Container sx={{paddingTop:'80px'}}>
       <Grid container spacing={4} alignItems="center">
         <Grid item xs={12} md={5}>
           <Card>

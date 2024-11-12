@@ -15,7 +15,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import Tooltip from '@mui/material/Tooltip';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import styles from './support.module.css'
-// import Image from 'next/image';
+import Image from 'next/image';
 
 interface SupportData {
     destination: string;
@@ -26,16 +26,15 @@ interface SupportData {
 
 const modalstyle = {
     position: 'absolute',
-    top: '60%',
+    top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '80%',
+    maxWidth: '90%',
     width: '100%',
     bgcolor: 'background.paper',
     border: '1px solid #000',
-
     borderRadius: '5px',
-    p: 3,
+    p: 2,
 };
 
 const modalheader = {
@@ -50,8 +49,6 @@ const modalheader = {
 
 const createData = (destination: string, poc: string, email: string, phone: string): SupportData => {
     return { destination, poc, email, phone };
-
-
 };
 
 const rows: SupportData[] = [
@@ -63,7 +60,6 @@ const rows: SupportData[] = [
     createData('Finance and Loan', 'Renu', 'eduloan@metaapply.io', '+91-9667300849'),
     createData('Operational Escalation', '-', 'operations@metaapply.io', '+91-9560708184'),
     createData('Portal Query', 'Wasim Khan', 'portal@metaapply.io', '+91-7428697321'),
-
 ];
 
 const Support = () => {
@@ -83,15 +79,26 @@ const Support = () => {
             <Modal sx={{ padding: '10px', border: 'none' }} open={open} onClose={handleClose}>
                 <Box sx={modalstyle}>
                     <Box sx={modalheader}>
-                        <Box sx={{maxWidth:'70%'}}>
+                        <Box sx={{
+                              maxWidth: { xs: '100%', md: '70%', },
+                            }}>
                             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
                                 Support
                             </Typography>
                             <Typography sx={{lineHeight:'1.2', fontSize:'.8rem', color:'#585858'}} variant="subtitle1" gutterBottom>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                             </Typography>
                         </Box>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
+                        <Box sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1em',
+                                position: { xs: 'absolute', sm: 'relative' }, 
+                                background: '#fff',
+                                right: { xs: '10px', sm: 'auto' }, 
+                                top: { xs: '10px', sm: 'auto' },  
+                                zIndex: 10, 
+                             }}>
                             <Button onClick={handleClose} variant="outlined">
                                 <CloseOutlinedIcon />
                             </Button>
@@ -131,8 +138,6 @@ const Support = () => {
                                             <TableCell align="center">
                                                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ marginLeft: '8px', textDecoration: 'none', color: '#25D366' }}>
                                                     <WhatsAppIcon />
-
-
                                                 </a>
                                             </TableCell>
                                             <TableCell align="center"> 

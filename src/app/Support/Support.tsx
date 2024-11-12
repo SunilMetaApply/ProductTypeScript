@@ -72,10 +72,10 @@ const Support = () => {
     return (
         <>
             <Tooltip title="Support">
-                <IconButton className={styles.supportBtn} onClick={handleOpen}>
+                <span className={styles.supportBtn} onClick={handleOpen}>
                     <HelpIcon />
                     {/* <Image src="/support.png" width={50} height={50} alt="" /> */}
-                </IconButton>
+                </span>
             </Tooltip>
 
             <Modal sx={{ padding: '10px', border: 'none' }} open={open} onClose={handleClose}>

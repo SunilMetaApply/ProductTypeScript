@@ -14,8 +14,9 @@ import TableRow from '@mui/material/TableRow';
 import HelpIcon from '@mui/icons-material/Help';
 import Tooltip from '@mui/material/Tooltip';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import styles from './support.module.css'
-import Image from 'next/image';
+import styles from './support.module.css';
+// import Image from 'next/image';
+import Link from 'next/link';
 
 interface SupportData {
     destination: string;
@@ -86,7 +87,7 @@ const Support = () => {
                                 Support
                             </Typography>
                             <Typography sx={{lineHeight:'1.2', fontSize:'.8rem', color:'#585858'}} variant="subtitle1" gutterBottom>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,
                             </Typography>
                         </Box>
                         <Box sx={{
@@ -131,19 +132,19 @@ const Support = () => {
                                             </TableCell>
                                             <TableCell>{row.poc}</TableCell>
                                             <TableCell>
-                                                <a href={`mailto:${row.email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                <Link href={`mailto:${row.email}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                                     {row.email}
-                                                </a>
+                                                </Link>
                                             </TableCell>
                                             <TableCell align="center">
-                                                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ marginLeft: '8px', textDecoration: 'none', color: '#25D366' }}>
+                                                <Link href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ marginLeft: '8px', textDecoration: 'none', color: '#25D366' }}>
                                                     <WhatsAppIcon />
-                                                </a>
+                                                </Link>
                                             </TableCell>
                                             <TableCell align="center"> 
-                                                <a href={`tel:${phoneNumber}`} style={{ textDecoration: 'none', color: 'inherit', whiteSpace:'nowrap' }}>
+                                                <Link href={`tel:${phoneNumber}`} style={{ textDecoration: 'none', color: 'inherit', whiteSpace:'nowrap' }}>
                                                     {row.phone}
-                                                </a>
+                                                </Link>
                                             </TableCell>
                                         </TableRow>
                                     );

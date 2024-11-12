@@ -1,0 +1,27 @@
+.supportBtn {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+  }
+  .supportBtn svg{
+    font-size: 45px;
+    color: #fd63a2;
+    box-shadow: 0px 0px 11px 2px #7272723d;
+    border-radius: 50%;
+  }
+  .tablecontainer{
+    max-height: 425px;
+    overflow-y: auto;
+  }
+  @media (max-width:1199px){
+    .tablecontainer{
+      max-height: 300px !important;
+    }
+  }
+  @media (max-width:992px){
+    .tablecontainer{
+      max-height: 200px !important;
+    }
+  }
+  

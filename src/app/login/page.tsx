@@ -1,18 +1,20 @@
-"use client"
+"use client";
 
 import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
 import { API_URL } from '../../../env'; 
-import { TextField, Button, Container, Box, Typography, Grid } from '@mui/material';
+import { TextField, Button, Container, Box, Typography, Grid, Alert } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/slice/authSlice';
+import Support from '../Support/Support';
 
 interface LoginValues {
   username: string;
   password: string;
 }
+
 interface ErrorResponse {
   message: string;
 }
@@ -24,6 +26,7 @@ const validationSchema = Yup.object({
 
 const Login: React.FC = () => {
   const [submitLoad, setSubmitLoad] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -34,6 +37,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (values: LoginValues, { resetForm }: FormikHelpers<LoginValues>) => {
     setSubmitLoad(true);
+    setErrorMessage(null);
     try {
       const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
@@ -50,30 +54,18 @@ const Login: React.FC = () => {
 
       const data = await response.json();
       const token = data.token;
-      const userResponse = await fetch(`${API_URL}/user/me`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
 
-      if (!userResponse.ok) {
-        throw new Error('Failed to fetch user data');
-      }
+      dispatch(login({ username: values.username, token }));
 
-      const userData = await userResponse.json();
-      console.log('userData')
-      console.log(userData)
-      dispatch(login({ username: values.username, token, userDetails: userData }));
-
-      router.push('/user/profile'); 
-
+      // Redirect the user
+      router.push('/products'); 
       resetForm();
 
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Login failed:', error.message);
+        setErrorMessage(error.message);
       } else {
-        console.error('An unexpected error occurred');
+        setErrorMessage('An unexpected error occurred');
       }
     } finally {
       setSubmitLoad(false);
@@ -82,15 +74,9 @@ const Login: React.FC = () => {
 
   return (
     <Container maxWidth="xs">
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        minHeight="100vh"
-        p={3}
-      >
+      <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="100vh" p={3}>
         <Typography variant="h4" gutterBottom>Login Form</Typography>
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -103,7 +89,7 @@ const Login: React.FC = () => {
                   <Field
                     name="username"
                     as={TextField}
-                    placeholder="User Name"
+                    label="User Name"
                     variant="outlined"
                     fullWidth
                     error={Boolean(errors.username && touched.username)}
@@ -115,7 +101,7 @@ const Login: React.FC = () => {
                   <Field
                     name="password"
                     as={TextField}
-                    placeholder="Password"
+                    label="Password"
                     type="password"
                     variant="outlined"
                     fullWidth
@@ -140,6 +126,9 @@ const Login: React.FC = () => {
           )}
         </Formik>
       </Box>
+
+<Support/>
+
     </Container>
   );
 };

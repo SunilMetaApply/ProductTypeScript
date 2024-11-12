@@ -17,7 +17,6 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import styles from './support.module.css';
 // import Image from 'next/image';
 import Link from 'next/link';
-import { IconButton } from '@mui/material';
 
 interface SupportData {
     destination: string;

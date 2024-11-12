@@ -17,6 +17,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import styles from './support.module.css';
 // import Image from 'next/image';
 import Link from 'next/link';
+import { IconButton } from '@mui/material';
 
 interface SupportData {
     destination: string;
@@ -71,10 +72,10 @@ const Support = () => {
     return (
         <>
             <Tooltip title="Support">
-                <span className={styles.supportBtn} onClick={handleOpen}>
+                <IconButton className={styles.supportBtn} onClick={handleOpen}>
                     <HelpIcon />
                     {/* <Image src="/support.png" width={50} height={50} alt="" /> */}
-                </span>
+                </IconButton>
             </Tooltip>
 
             <Modal sx={{ padding: '10px', border: 'none' }} open={open} onClose={handleClose}>
@@ -137,9 +138,11 @@ const Support = () => {
                                                 </Link>
                                             </TableCell>
                                             <TableCell align="center">
-                                                <Link href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ marginLeft: '8px', textDecoration: 'none', color: '#25D366' }}>
-                                                    <WhatsAppIcon />
-                                                </Link>
+                                                <Tooltip title={row.poc}>
+                                                    <Link href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ marginLeft: '8px', textDecoration: 'none', color: '#25D366' }}>
+                                                        <WhatsAppIcon />
+                                                    </Link>
+                                                </Tooltip>
                                             </TableCell>
                                             <TableCell align="center"> 
                                                 <Link href={`tel:${phoneNumber}`} style={{ textDecoration: 'none', color: 'inherit', whiteSpace:'nowrap' }}>

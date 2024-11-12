@@ -86,7 +86,7 @@ const Support = () => {
                             <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
                                 Support
                             </Typography>
-                            <Typography sx={{lineHeight:'1.2', fontSize:'.8rem', color:'#585858'}} variant="subtitle1" gutterBottom>
+                            <Typography sx={{lineHeight:'1.3', fontSize:'.8rem', color:'#585858'}} variant="subtitle1" gutterBottom>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,
                             </Typography>
                         </Box>

@@ -17,6 +17,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import styles from './support.module.css';
 // import Image from 'next/image';
 import Link from 'next/link';
+import { IconButton } from '@mui/material';
 
 interface SupportData {
     destination: string;
@@ -71,19 +72,40 @@ const Support = () => {
     return (
         <>
             <Tooltip title="Support">
-                <span className={styles.supportBtn} onClick={handleOpen}>
+                {/* <span className={styles.supportBtn} onClick={handleOpen}>
                     <HelpIcon />
                     {/* <Image src="/support.png" width={50} height={50} alt="" /> */}
-                </span>
+                {/* </span> */}
+                <IconButton 
+                    onClick={handleOpen} 
+                    sx={{
+                    position: 'fixed',
+                    right: 10,
+                    bottom: 10,
+                    cursor: 'pointer',
+                    backgroundColor:'#fff',
+                    boxShadow:'0px 0px 5px',
+                    zIndex:'99',
+                    p:0
+                  }}
+                >
+                    <HelpIcon
+                     sx={{
+                        fontSize: 50, 
+                        color: '#fd63a2', 
+                        borderRadius: '50%', 
+                      }}
+                    />
+                </IconButton>
             </Tooltip>
 
             <Modal sx={{ padding: '10px', border: 'none' }} open={open} onClose={handleClose}>
                 <Box sx={modalstyle}>
                     <Box sx={modalheader}>
                         <Box sx={{
-                              maxWidth: { xs: '100%', md: '70%', },
+                              maxWidth: { xs: '100%', md: '70%' },
                             }}>
-                            <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                            <Typography variant="h5" sx={{ fontWeight: 'bold', color:'#2f3293' }}>
                                 Support
                             </Typography>
                             <Typography sx={{lineHeight:'1.3', fontSize:'.8rem', color:'#585858'}} variant="subtitle1" gutterBottom>
@@ -99,8 +121,24 @@ const Support = () => {
                                 right: { xs: '10px', sm: 'auto' }, 
                                 top: { xs: '10px', sm: 'auto' },  
                                 zIndex: 10, 
+                                width:'40px',
+                                height:'40px',
+                                borderRadius:'50%',
+                                textAlign:'center'
                              }}>
-                            <Button onClick={handleClose} variant="outlined">
+                            <Button 
+                                onClick={handleClose} 
+                                variant="outlined"
+                                sx={{
+                                    borderRadius: '50%', 
+                                    padding: '10px', 
+                                    width:'40px',
+                                    minWidth:'inherit',
+                                    height:'40px',
+                                    textAlign:'center',
+                                    background:'#fff'
+                                }}
+                            >
                                 <CloseOutlinedIcon />
                             </Button>
                         </Box>
